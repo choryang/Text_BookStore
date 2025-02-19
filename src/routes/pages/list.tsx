@@ -1,11 +1,12 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import BookItem from "../../components/BookItem"
-// import ReactPaginate from 'react-paginate';
 import { SearchBox, SearchSelect, SerachInput, StoreName } from "../../styles/List"
 import { useEffect, useState } from "react"
 import { faSearch } from "@fortawesome/free-solid-svg-icons"
 import { ListWrapper } from "../../styles/BookItem"
 import { CommonLayout } from "../../styles/Layout"
+import { StyledPagination } from "../../styles/pagination"
+import Pagination from "react-js-pagination"
 
 interface IBookInfo {
     [key: string]: string | number
@@ -189,7 +190,6 @@ export default function List() {
     const [slicedList, setSlicedList] = useState(books);
     const indexOfLastItem = page * itemsPerPage;
     const indexOfFirstItem = indexOfLastItem - itemsPerPage;
-    // const pageCount = Math.ceil(listBooks.length / itemsPerPage);
 
 
     useEffect(() => {
@@ -237,15 +237,17 @@ export default function List() {
                 return <BookItem {...book} key={index}/>
             })}
             </ListWrapper>
-           {/*<ReactPaginate 
-                breakLabel="..."
-                nextLabel="next >"
-                onPageChange={pageHandler}
-                pageRangeDisplayed={5}
-                pageCount={pageCount}
-                previousLabel="< previous"
-                renderOnZeroPageCount={null}
-            />*/}
+            <StyledPagination>
+                <Pagination
+                    activePage={page}
+                    itemsCountPerPage={itemsPerPage}
+                    totalItemsCount={listBooks.length}
+                    pageRangeDisplayed={5}
+                    prevPageText={"<"}
+                    nextPageText={">"}
+                    onChange={pageHandler}
+                />
+            </StyledPagination>
         </CommonLayout>
     )
 }
