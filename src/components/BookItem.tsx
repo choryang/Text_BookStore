@@ -2,13 +2,7 @@ import { useNavigate } from "react-router-dom"
 import { BookInfoWrapper, BookTitle, ItemWrapper } from "../styles/BookItem"
 
 interface IBookInfo {
-    id: string,
-    title: string,
-    author: string,
-    price: number,
-    stock: number,
-    sold: number,
-    detail: string,
+    [key: string]: string | number
 }
 
 const BookItem = (book: IBookInfo) => {
