@@ -15,7 +15,7 @@ interface IBookInfo {
 
 export default function List() {
 
-    const [books, setBooks] = useState<IBookInfo[]>([{title: " ", author: " "}]);
+    const [books, setBooks] = useState<IBookInfo[]>([]);
 
     function fetchBooks() {
         api.get("/api/books").then((response) => {
