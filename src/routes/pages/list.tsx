@@ -7,179 +7,29 @@ import { ListWrapper } from "../../styles/BookItem"
 import { CommonLayout } from "../../styles/Layout"
 import { StyledPagination } from "../../styles/pagination"
 import Pagination from "react-js-pagination"
+import api from "../axios"
 
 interface IBookInfo {
     [key: string]: string | number
 }
 
 export default function List() {
-   
-    const books: IBookInfo[] = [
-        {
-            id: "1",
-            title: "test1",
-            author: "test1",
-            price: 10000,
-            stock: 10,
-            sold: 10,
-            detail: "detaildetaildetaildetaildetail",
-        },
-        {
-            id: "2",
-            title: "test2",
-            author: "test2",
-            price: 20000,
-            stock: 20,
-            sold: 20,
-            detail: "detaildetaildetaildetaildetail",
-        },
-        {
-            id: "3",
-            title: "test3",
-            author: "test3",
-            price: 30000,
-            stock: 30,
-            sold: 30,
-            detail: "detaildetaildetaildetaildetail",
-        },
-        {
-            id: "4",
-            title: "test4",
-            author: "test4",
-            price: 40000,
-            stock: 40,
-            sold: 40,
-            detail: "detaildetaildetaildetaildetail",
-        },
-        {
-            id: "5",
-            title: "test5",
-            author: "test5",
-            price: 50000,
-            stock: 50,
-            sold: 50,
-            detail: "detaildetaildetaildetaildetail",
-        },
-        {
-            id: "3",
-            title: "test3",
-            author: "test3",
-            price: 30000,
-            stock: 30,
-            sold: 30,
-            detail: "detaildetaildetaildetaildetail",
-        },
-        {
-            id: "1",
-            title: "test1",
-            author: "test1",
-            price: 10000,
-            stock: 10,
-            sold: 10,
-            detail: "detaildetaildetaildetaildetail",
-        },
-        {
-            id: "2",
-            title: "test2",
-            author: "test2",
-            price: 20000,
-            stock: 20,
-            sold: 20,
-            detail: "detaildetaildetaildetaildetail",
-        },
-        {
-            id: "3",
-            title: "test3",
-            author: "test3",
-            price: 30000,
-            stock: 30,
-            sold: 30,
-            detail: "detaildetaildetaildetaildetail",
-        },
-        {
-            id: "1",
-            title: "test1",
-            author: "test1",
-            price: 10000,
-            stock: 10,
-            sold: 10,
-            detail: "detaildetaildetaildetaildetail",
-        },
-        {
-            id: "2",
-            title: "test2",
-            author: "test2",
-            price: 20000,
-            stock: 20,
-            sold: 20,
-            detail: "detaildetaildetaildetaildetail",
-        },
-        {
-            id: "3",
-            title: "test3",
-            author: "test3",
-            price: 30000,
-            stock: 30,
-            sold: 30,
-            detail: "detaildetaildetaildetaildetail",
-        },
-        {
-            id: "1",
-            title: "test1",
-            author: "test1",
-            price: 10000,
-            stock: 10,
-            sold: 10,
-            detail: "detaildetaildetaildetaildetail",
-        },
-        {
-            id: "2",
-            title: "test2",
-            author: "test2",
-            price: 20000,
-            stock: 20,
-            sold: 20,
-            detail: "detaildetaildetaildetaildetail",
-        },
-        {
-            id: "3",
-            title: "test3",
-            author: "test3",
-            price: 30000,
-            stock: 30,
-            sold: 30,
-            detail: "detaildetaildetaildetaildetail",
-        },
-        {
-            id: "1",
-            title: "test1",
-            author: "test1",
-            price: 10000,
-            stock: 10,
-            sold: 10,
-            detail: "detaildetaildetaildetaildetail",
-        },
-        {
-            id: "2",
-            title: "test2",
-            author: "test2",
-            price: 20000,
-            stock: 20,
-            sold: 20,
-            detail: "detaildetaildetaildetaildetail",
-        },
-        {
-            id: "3",
-            title: "test3",
-            author: "test3",
-            price: 30000,
-            stock: 30,
-            sold: 30,
-            detail: "detaildetaildetaildetaildetail",
-        }
-    ];
 
-     const [listBooks, setListBooks] = useState(books);
+    const [books, setBooks] = useState<IBookInfo[]>([{title: " ", author: " "}]);
+
+    function fetchBooks() {
+        api.get("/api/books").then((response) => {
+            console.log(response.data);
+            setBooks(response.data)
+            setListBooks(response.data)
+        })
+    }
+    
+    useEffect(() => {
+        fetchBooks();
+    }, [])
+   
+    const [listBooks, setListBooks] = useState(books);
 
     const options = [{value: "title", label: "제목"}, {value: "author", label: "저자"}]
     const [searchKey, setSearchKey] = useState(options[0].value)
