@@ -189,10 +189,11 @@ export default function List() {
     const [slicedList, setSlicedList] = useState(books);
     const indexOfLastItem = page * itemsPerPage;
     const indexOfFirstItem = indexOfLastItem - itemsPerPage;
-    const pageCount = Math.ceil(listBooks.length / itemsPerPage);
+    // const pageCount = Math.ceil(listBooks.length / itemsPerPage);
 
 
     useEffect(() => {
+        pageHandler(page);
         setSlicedList(listBooks.slice(indexOfFirstItem, indexOfLastItem));
     }, [page, listBooks])
 
